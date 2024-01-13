@@ -1,3 +1,7 @@
+"""
+coggle数据挖掘和人工智能项目最佳实践
+"""
+
 __version__ = "0.1.0"
 
 from . import dataset

@@ -46,13 +46,13 @@ def load_lcqmc() -> pd.DataFrame:
         valid = pd.read_csv(LOCAL_DATASET_PATH + 'LCQMC.valid')
         test = pd.read_csv(LOCAL_DATASET_PATH + 'LCQMC.test')
     else:
-        train = pd.read_csv(DATASET_CDN_URL["LCQMC_train"], 
+        train = pd.read_csv(DATASET_CDN_URL["LCQMC_train"],
             sep='\t', names=['query1', 'query2', 'label'])
 
-        valid = pd.read_csv(DATASET_CDN_URL["LCQMC_valid"], 
+        valid = pd.read_csv(DATASET_CDN_URL["LCQMC_valid"],
             sep='\t', names=['query1', 'query2', 'label'])
 
-        test = pd.read_csv(DATASET_CDN_URL["LCQMC_test"], 
+        test = pd.read_csv(DATASET_CDN_URL["LCQMC_test"],
             sep='\t', names=['query1', 'query2', 'label'])
 
         train.to_csv(LOCAL_DATASET_PATH + 'LCQMC.train', index=None)

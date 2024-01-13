@@ -1,9 +1,9 @@
 from typing import List, Any
 import numpy as np
 import cv2
+from multiprocessing import cpu_count
 from sklearn.preprocessing import normalize
 from concurrent.futures import ProcessPoolExecutor
-from multiprocessing import cpu_count
 
 class ColorHistogram:
     def __init__(self, 
