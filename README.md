@@ -14,6 +14,12 @@ cd tests
 pytest --cov ../
 ```
 
+- 打包分发
+```
+$ python3 setup.py bdist_wheel sdist
+$ twine upload dist/* --verbose
+```
+
 ## 额外库
 
 - SpaCy, https://spacy.io/models

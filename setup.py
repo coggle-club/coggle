@@ -15,7 +15,20 @@ setup(
         'gensim',
         'emoji',
         'joblib',
-        'scikit-learn'
+        'scikit-learn',
+        'nvitop',
+        'spacy',
+        'transformers',
+        'pdfplumber',
+        'pypdf',
+        'python-docx',
+        'python-pptx',
+        'beautifulsoup4'
+        'sqlalchemy',
+        'torch',
+        'torchvision',
+        'sentence-transformers',
+        'timm'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
