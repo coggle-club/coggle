@@ -3,6 +3,7 @@ import numpy as np
 import timm
 import torch
 from sklearn.preprocessing import normalize
+from concurrent.futures import ProcessPoolExecutor
 
 class ImageEmbedding:
     def __init__(self, 
