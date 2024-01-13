@@ -6,8 +6,8 @@ from sklearn.preprocessing import normalize
 from concurrent.futures import ProcessPoolExecutor
 
 class ColorHistogram:
-    def __init__(self, 
-        img_ids:List[Any]=None, 
+    def __init__(self,
+        img_ids:List[Any]=None,
         img_paths:List[List[str]]=None,
     ):
         """
@@ -27,8 +27,7 @@ class ColorHistogram:
         if img_ids is not None:
             if len(img_ids) != len(img_paths):
                 raise Exception("the count of img_ids do not math img_paths!")
-            
-            self.batch_add_documents(img_ids, img_paths)
+            self.batch_add_images(img_ids, img_paths)
 
     def encode(self, img_path:str) -> np.ndarray:
         img = cv2.imread(img_path)
@@ -39,10 +38,8 @@ class ColorHistogram:
     def update_image(self, img_id: Any, img_path: str) -> bool:
         if sum(img_id == self.img_id_list) == 0:
             return False
-
         idx = np.where(img_id == self.img_id_list)[0]
         self.total_feats[idx] = self.encode(img_path)
-
         return True
 
     def add_image(self, img_id: Any, img_path: str) -> bool:
@@ -93,7 +90,7 @@ class ColorHistogram:
         return True
 
     def query_by_image(self, img_path: str, top_n=10) -> List[Any]:
-        query_feat = self.histogram_feat(img_path)
+        query_feat = self.encode(img_path)
         query_feat = normalize(query_feat.reshape(1, -1))
         
         score = np.dot(query_feat, self.corpus_feats.T)[0]

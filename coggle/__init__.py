@@ -9,3 +9,14 @@ from . import metrics
 from . import utils
 from . import text
 from . import parser
+
+import nltk
+nltk.download('punkt')
+
+__all__ = [
+    "dataset",
+    "metrics",
+    "utils",
+    "text",
+    "parser"
+]
