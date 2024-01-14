@@ -1,8 +1,14 @@
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
 from typing import Union, List
 import spacy
 
 
 class SentenceSegment:
+    """SentenceSegment"""
     def __init__(
         self,
         chunk_size: int = 1,
@@ -28,17 +34,26 @@ class SentenceSegment:
         self.language = language
 
         if self.separator is None and self.model_name is None:
-            raise Exception("separator and model_name can not both set None in WordSegment")
+            raise NotImplementedError("separator and model_name is None in WordSegment")
 
         if self.chunk_size <= self.chunk_overlap:
-            raise Exception("chunk_size must greate then chunk_overlap!")
+            raise RuntimeError("chunk_size must greate then chunk_overlap!")
 
         try:
             self.nlp = spacy.load(self.model_name)
-        except IOError:
-            raise NotImplementedError("SpaCy模型需要单独下载，如果想要快速安装，可以查看库主页安装教程：https://github.com/coggle-club/coggle")
+        except:
+            raise RuntimeError("SpaCy模型需要单独下载，可以查看安装教程：https://github.com/coggle-club/coggle")
 
-    def __call__(self, document: str) -> List[str]:
+    def segment(self, document: str) -> List[str]:
+        """
+        将文档切分成块，按照预定的块大小和重叠大小
+
+        参数:
+        - document: 输入的文档字符串
+
+        返回:
+        - 切分后的文档块列表
+        """
         if self.separator is not None:
             sents = document.split(self.separator)
         elif self.model_name is not None:
@@ -69,17 +84,4 @@ class SentenceSegment:
 
         if self.chunk_overlap > 0 and segments[-1] == sents[-1]:
             segments.pop()
-            
         return segments
-
-    def segment(self, document: str) -> List[str]:
-        """
-        将文档切分成块，按照预定的块大小和重叠大小
-
-        参数:
-        - document: 输入的文档字符串
-
-        返回:
-        - 切分后的文档块列表
-        """
-        return self.__call__(document)

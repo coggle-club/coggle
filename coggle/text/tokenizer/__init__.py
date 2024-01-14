@@ -1,3 +1,5 @@
+"""文本分词模块"""
+
 from .hugingface_tokenizer import HuggingFaceTokenizer
 from .jieba_tokenizer import JiebaTokenizer
 from .nltk_tokenizer import NLTKTokenizer

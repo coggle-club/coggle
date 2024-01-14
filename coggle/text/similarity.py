@@ -1,3 +1,9 @@
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
+
 import math
 from difflib import SequenceMatcher
 from collections import Counter
@@ -5,11 +11,25 @@ from typing import AnyStr
 
 
 def longest_substr_length(s1: AnyStr, s2: AnyStr) -> int:
+    """
+    Returns the length of the longest common substring between two strings.
+
+    :param s1: The first string.
+    :param s2: The second string.
+    :return: The length of the longest common substring.
+    """
     match = SequenceMatcher(None, s1, s2).find_longest_match()
     return match.size
 
 
 def edit_distance(s1: AnyStr, s2: AnyStr) -> int:
+    """
+    Calculates the Levenshtein edit distance between two strings.
+
+    :param s1: The first string.
+    :param s2: The second string.
+    :return: The edit distance between the two strings.
+    """
     if len(s1) > len(s2):
         s1, s2 = s2, s1
 
@@ -31,6 +51,13 @@ def edit_distance(s1: AnyStr, s2: AnyStr) -> int:
 
 
 def cosine_distance(s1: AnyStr, s2: AnyStr) -> float:
+    """
+    Calculates the cosine distance between two strings.
+
+    :param s1: The first string.
+    :param s2: The second string.
+    :return: The cosine distance between the two strings.
+    """
     vec1 = Counter(s1)
     vec2 = Counter(s2)
 
@@ -48,6 +75,13 @@ def cosine_distance(s1: AnyStr, s2: AnyStr) -> float:
 
 
 def jaccard_distance(s1: AnyStr, s2: AnyStr) -> float:
+    """
+    Calculates the Jaccard distance between two strings.
+
+    :param s1: The first string.
+    :param s2: The second string.
+    :return: The Jaccard distance between the two strings.
+    """
     set_s1 = set(s1)
     set_s2 = set(s2)
 
@@ -56,17 +90,30 @@ def jaccard_distance(s1: AnyStr, s2: AnyStr) -> float:
 
 
 def prefix_length(s1: AnyStr, s2: AnyStr) -> int:
+    """
+    Returns the length of the common prefix between two strings.
+
+    :param s1: The first string.
+    :param s2: The second string.
+    :return: The length of the common prefix.
+    """
     distance = 0
     for c1, c2 in zip(s1, s2):
         if c1 == c2:
             distance += 1
         else:
             break
-
     return distance
 
 
 def hamming_distance(s1: AnyStr, s2: AnyStr) -> int:
+    """
+    Calculates the Hamming distance between two strings.
+
+    :param s1: The first string.
+    :param s2: The second string.
+    :return: The Hamming distance between the two strings.
+    """
     distance = len(s1) - len(s2)
     for c1, c2 in zip(s1, s2):
         if c1 == c2:

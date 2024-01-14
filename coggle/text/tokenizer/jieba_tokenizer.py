@@ -1,10 +1,17 @@
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
+
 from typing import Union, List
-import jieba
 from concurrent.futures import ProcessPoolExecutor
 from multiprocessing import cpu_count
+import jieba
 
 
 class JiebaTokenizer:
+    """JiebaTokenizer"""
     def __init__(self):
         """
         初始化JiebaTokenizer对象，用于jieba分词
@@ -38,5 +45,4 @@ class JiebaTokenizer:
         else:
             with ProcessPoolExecutor(max_workers=self.cpu_count) as executor:
                 result = list(executor.map(self._tokenize, text))
-        
         return result

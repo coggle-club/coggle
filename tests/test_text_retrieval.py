@@ -84,14 +84,14 @@ def test_TextEmbedding():
     index = TextEmbedding('all-MiniLM-L6-v2', [1,2], ["1", "2"])
     assert index.total_size == 2
 
-    assert index.query_by_text(["1"])[0][0] == 1
+    assert index.query(["1"])[0][0] == 1
 
     index.add_document(3, "3")
     index.delete_document(3)
     assert index.total_size == 2
 
     index.update_document(1, "3")
-    assert index.query_by_text(["3"])[0][0] == 1
+    assert index.query(["3"])[0][0] == 1
 
     assert isinstance(index.query_by_feat(np.zeros(384)), list) == True
 

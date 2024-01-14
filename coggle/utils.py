@@ -1,8 +1,17 @@
-import psutil
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
+
 from typing import Sequence
+import psutil
 
 
 def check_env(appendix_packages: Sequence[str]) -> dict:
+    '''
+    检查系统中库支持情况
+    '''
     result = {
         'package': {}
     }
@@ -36,7 +45,7 @@ def check_env(appendix_packages: Sequence[str]) -> dict:
                 'temperature': device.temperature()
             })
 
-    except:
+    except ImportError:
         pass
 
     result['total_memory'] = psutil.virtual_memory().total / 1024 / 1024

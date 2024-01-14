@@ -1,3 +1,5 @@
+"""文本处理与建模模块"""
+
 from . import tokenizer
 from . import segment
 from . import retrieval

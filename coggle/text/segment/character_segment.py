@@ -1,7 +1,13 @@
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
 from typing import List
 
 
 class CharacterSegment:
+    """CharacterSegment"""
     def __init__(
         self,
         chunk_size: int = 30,
@@ -20,29 +26,7 @@ class CharacterSegment:
         self.chunk_overlap = chunk_overlap
 
         if self.chunk_size <= self.chunk_overlap:
-            raise Exception("chunk_size must greate then chunk_overlap!")
-
-    def __call__(self, document: str) -> List[str]:
-        if len(document) <= self.chunk_size:
-            return [document]
-
-        segments = []
-        start = 0
-
-        while start < len(document):
-            end = start + self.chunk_size
-            if end > len(document):
-                end = len(document)
-            
-            segment = document[start:end]
-            segments.append(segment)
-
-            start += self.chunk_size - self.chunk_overlap
-        
-        if self.chunk_overlap > 0 and len(segment) != self.chunk_size:
-            segments.pop()
-        
-        return segments
+            raise RuntimeError("chunk_size must greate then chunk_overlap!")
 
     def segment(self, document: str) -> List[str]:
         """
@@ -54,4 +38,24 @@ class CharacterSegment:
         返回:
         - 切分后的文档块列表
         """
-        return self.__call__(document)
+        if len(document) <= self.chunk_size:
+            return [document]
+
+        segments = []
+        start = 0
+
+        while start < len(document):
+            end = start + self.chunk_size
+            if end > len(document):
+                end = len(document)
+            segment = document[start:end]
+            segments.append(segment)
+
+            start += self.chunk_size - self.chunk_overlap
+        if self.chunk_overlap > 0 and len(segment) != self.chunk_size:
+            segments.pop()
+
+        return segments
+
+    def __call__(self, document: str) -> List[str]:
+        return self.segment(document)

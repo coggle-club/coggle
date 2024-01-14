@@ -1,3 +1,9 @@
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
+
 from typing import Union, List
 from concurrent.futures import ProcessPoolExecutor
 from multiprocessing import cpu_count
@@ -8,6 +14,7 @@ from nltk.tokenize import TweetTokenizer
 
 
 class NLTKTokenizer:
+    """NLTKTokenizer"""
     def __init__(self, method: str = 'word'):
         """
         初始化JiebaTokenizer对象
@@ -38,6 +45,11 @@ class NLTKTokenizer:
         return list(self.token_funct(text))
 
     def tokenize(self, text: Union[str, List[str]]) -> List:
+        """
+        对文本进行拆分
+
+        - 
+        """
         if isinstance(text, str):
             return self._tokenize(text)
 

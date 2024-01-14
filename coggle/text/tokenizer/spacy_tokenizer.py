@@ -1,9 +1,15 @@
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
+
 from concurrent.futures import ProcessPoolExecutor
-import spacy
-import traceback
 from typing import Union, List
+import spacy
 
 class SpaCyTokenizer:
+    """SpaCyTokenizer"""
     def __init__(self, model_name='zh_core_web_sm'):
         '''
         初始化SpaCyTokenizer对象
@@ -14,16 +20,15 @@ class SpaCyTokenizer:
         self.model_name = model_name
         try:
             self.nlp = spacy.load(self.model_name)
-        except IOError:
-            raise NotImplementedError("SpaCy模型需要单独下载，可以查看库主页安装教程：https://github.com/coggle-club/coggle")
+        except:
+            raise NotImplementedError(
+                "SpaCy模型需要单独下载，查看主页安装教程：https://github.com/coggle-club/coggle"
+            )
 
     def __call__(self, text: Union[str, List[str]]) -> List:
         return self.tokenize(text)
 
     def _tokenize(self, text: str) -> List:
-        if text is None:
-            return []
-        
         doc = self.nlp(text)
         return [x.text for x in doc]
 
@@ -37,6 +42,9 @@ class SpaCyTokenizer:
         返回:
         - 切分后的文档块列表
         """
+        if text is None:
+            return []
+        
         if isinstance(text, str):
             return self._tokenize(text)
 

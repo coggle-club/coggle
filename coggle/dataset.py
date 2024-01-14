@@ -1,3 +1,9 @@
+"""
+Package: coggle
+Author: finlay
+Date: 2024
+"""
+
 import os
 import pandas as pd
 
@@ -5,7 +11,7 @@ LOCAL_DATASET_PATH = os.path.expanduser('~/') + '.local/coggle/'
 if not os.path.exists(LOCAL_DATASET_PATH):
     try:
         os.makedirs(LOCAL_DATASET_PATH)
-    except:
+    except OSError:
         print(f'The cache path {LOCAL_DATASET_PATH} created fails.')
 
 DATASET_CDN_URL = {
